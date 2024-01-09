@@ -34,4 +34,3 @@ def type_joueur(joueur: dict) -> bool:
         return False
     return True
 
-
