@@ -91,3 +91,4 @@ def setIdPion(pion: dict, id: int) -> None:
         raise TypeError("setIdPion : Le second paramètre n’est pas un entier. ")
     pion[const.ID] = id
     return None
+
