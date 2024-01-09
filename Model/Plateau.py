@@ -35,6 +35,10 @@ def type_plateau(plateau: list) -> bool:
     return True
 
 def construirePlateau() -> list:
+    """
+    Construit un plateau vide
+    :return: un plateau vide sous forme de double liste/Tableau 2D
+    """
     plateau = []
     for i in range(const.NB_LINES):
         ligne =[]
@@ -42,3 +46,5 @@ def construirePlateau() -> list:
             ligne.append(None)
         plateau.append(ligne)
     return plateau
+
+def placerPionPlateau(plateau: list, pion: dict, numCol: int) -> int:
