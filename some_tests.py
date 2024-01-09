@@ -27,7 +27,13 @@ from Model.Constantes import *
 from Model.Plateau import *
 from Model.Pion import *
 from random import randint, choice
-p = construirePlateau()
+"""p = construirePlateau()
 for _ in range(20):
     placerPionPlateau(p, construirePion(choice(const.COULEURS)),randint(0, const.NB_COLUMNS - 1))
-print(toStringPlateau(p))
+print(toStringPlateau(p))"""
+
+p2 = construirePlateau()
+for _ in range(20):
+    placerPionPlateau(p2, construirePion(choice(const.COULEURS)),randint(0, const.NB_COLUMNS - 1))
+print(detecter4horizontalPlateau(p2,const.JAUNE))
+print(toStringPlateau(p2))

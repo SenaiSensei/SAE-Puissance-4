@@ -74,3 +74,43 @@ def placerPionPlateau(plateau: list, pion: dict, numCol: int) -> int:
             i += 1
         i -= 1
     return i
+
+def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
+    """
+    Retourne une liste de liste de 4 pions aligné horizontalement de la couleur choisie
+    :param plateau: Paramètre lu pour connaître la position des pions
+    :param couleur: Paramètre de la couleur choisie
+    :return: tableau 2D des pions alignés horizontalements
+    """
+    if not(type_plateau(plateau)):
+        raise TypeError("detecter4horizontalPlateau : Le premier paramètre ne correspond pas à un plateau.")
+    elif type(couleur) != int:
+        raise TypeError("detecter4horizontalPlateau : le second paramètre n’est pas un entier.")
+    elif couleur > 1 or couleur < 0:
+        raise ValueError("detecter4horizontalPlateau : La valeur de la couleur (valeur_du_paramètre) n’est pas correcte.")
+
+    listeSerie4 = []
+    for i in range(const.NB_LINES):
+        serie4 = []
+        pos = []
+        j = 0
+        fin = False
+        while j < const.NB_COLUMNS and not fin:
+            if type_pion(plateau[i][j]):
+                if plateau[i][j][const.COULEUR] == couleur:
+                    serie4.append(plateau[i][j])
+                    pos.append(j)
+
+                if len(serie4) >=2:
+                    f = len(serie4)-1
+                    if pos[f] > pos[f-1]+1:
+                        for h in range(f):
+                            del pos[0]
+                            del serie4[0]
+
+            if len(serie4) >= 4:
+                listeSerie4.append(serie4)
+                fin = True
+
+            j += 1
+    return listeSerie4
