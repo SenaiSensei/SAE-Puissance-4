@@ -34,4 +34,11 @@ def type_plateau(plateau: list) -> bool:
         return False
     return True
 
-
+def construirePlateau() -> list:
+    plateau = []
+    for i in range(const.NB_LINES):
+        ligne =[]
+        for j in range(const.NB_COLUMNS):
+            ligne.append(None)
+        plateau.append(ligne)
+    return plateau
