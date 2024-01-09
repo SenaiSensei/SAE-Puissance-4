@@ -31,7 +31,7 @@ def construirePion(couleur: int) -> dict:
     Construit un Pion avec la couleur définie
 
     :param couleur: entier représentant la couleur choisie avec 1 : rouge et 0 : le jaune
-    :return: Le pion avec la couleur choisie
+    :return: Un dictionnaire représentant le pion avec la couleur choisie
     """
     if type(couleur) != int:
         raise TypeError("construirePion : Le paramètre n’est pas de type entier ")
@@ -42,6 +42,37 @@ def construirePion(couleur: int) -> dict:
     return pion
 
 def getCouleurPion(pion: dict) -> int:
+    """
+    Retourne la couleur du pion passé en paramètre
+    :param pion: Paramètre dont on veut savoir la couleur
+    :return: Un entier représentant la couleur du pion
+    """
     if type(pion) != dict or len(pion) != 2:
         raise TypeError("getCouleurPion : Le paramètre n’est pas un pion ")
     return pion[const.COULEUR]
+
+def setCouleurPion(pion: dict, couleur: int) -> None:
+    """
+    Change la couleur du pion avec la couleur en second paramètre
+    :param pion: Paramètre dont on veut changer la couleur
+    :param couleur: Paramètre qui définit la couleur du pion
+    :return: Rien
+    """
+    if type(pion) != dict or len(pion) != 2:
+        raise TypeError("setCouleurPion : Le premier paramètre n’est pas un pion ")
+    elif type(couleur) != int:
+        raise TypeError("setCouleurPion : Le second paramètre n’est pas un entier.")
+    elif couleur > 1 or couleur < 0:
+        raise ValueError("setCouleurPion : Le second paramètre (valeur_du_second_paramètre) n’est pas une couleur")
+    if pion[const.COULEUR] != couleur:
+        pion[const.COULEUR] = couleur
+    return None
+
+def getIdPion(pion: dict) -> int:
+    """
+    Retourne l'identifiant du pion passé en paramètre
+    :param pion: Paramètre dont on veut connaître l'identifiant
+    :return: Un entier représentant l'identifiant du pion
+    """
+    if type(pion) != dict or len(pion) != 2:
+        raise TypeError("getIdPion : Le paramètre n’est pas un pion ")
