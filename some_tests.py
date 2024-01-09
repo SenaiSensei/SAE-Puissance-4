@@ -34,6 +34,7 @@ print(toStringPlateau(p))"""
 
 p2 = construirePlateau()
 for _ in range(20):
-    placerPionPlateau(p2, construirePion(choice(const.COULEURS)),randint(0, const.NB_COLUMNS - 1))
-print(detecter4horizontalPlateau(p2,const.JAUNE))
+    placerPionPlateau(p2, construirePion(const.ROUGE),randint(0, const.NB_COLUMNS - 1))
+print(detecter4horizontalPlateau(p2,const.ROUGE))
+print(detecter4verticalPlateau(p2,const.ROUGE))
 print(toStringPlateau(p2))

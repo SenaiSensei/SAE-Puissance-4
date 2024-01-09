@@ -114,3 +114,44 @@ def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
 
             j += 1
     return listeSerie4
+
+def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
+    """
+        Retourne une liste de liste de 4 pions aligné verticalment de la couleur choisie
+        :param plateau: Paramètre lu pour connaître la position des pions
+        :param couleur: Paramètre de la couleur choisie
+        :return: tableau 2D des pions alignés verticalement
+        """
+    if not (type_plateau(plateau)):
+        raise TypeError("detecter4verticalPlateau : Le premier paramètre ne correspond pas à un plateau.")
+    elif type(couleur) != int:
+        raise TypeError("detecter4verticalPlateau : le second paramètre n’est pas un entier.")
+    elif couleur > 1 or couleur < 0:
+        raise ValueError(
+            "detecter4verticalPlateau : La valeur de la couleur (valeur_du_paramètre) n’est pas correcte.")
+
+    listeSerie4 = []
+    for j in range(const.NB_COLUMNS):
+        serie4 = []
+        pos = []
+        i = 0
+        fin = False
+        while i < const.NB_LINES and not fin:
+            if type_pion(plateau[i][j]):
+                if plateau[i][j][const.COULEUR] == couleur:
+                    serie4.append(plateau[i][j])
+                    pos.append(j)
+
+                if len(serie4) >= 2:
+                    f = len(serie4) - 1
+                    if pos[f] > pos[f - 1] + 1:
+                        for h in range(f):
+                            del pos[0]
+                            del serie4[0]
+
+            if len(serie4) >= 4:
+                listeSerie4.append(serie4)
+                fin = True
+
+            i += 1
+    return listeSerie4
