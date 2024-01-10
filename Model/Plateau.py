@@ -231,31 +231,47 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
         raise ValueError("detecter4diagonaleIndirectePlateau : La valeur de la couleur (valeur_du_paramètre) n’est pas correcte.")
 
     listeSerie4 = []
-    for i in range(const.NB_LINES -1, -1, -1):
-        j = 0
+    i = const.NB_LINES-1
+    rep = 0
+    j = 0
+    ni = False
+    while rep < const.NB_LINES:
+        line = i
+        col = j
         serie4 = []
         pos = []
         fin = False
-        h = i
-        while j < const.NB_COLUMNS and h >= 0 and not fin:
-            if type_pion(plateau[h][j]):
-                if plateau[h][j][const.COULEUR] == couleur:
-                    serie4.append(plateau[h][j])
-                    pos.append((h, j))
+
+        while col < const.NB_COLUMNS and line < const.NB_LINES and not fin:
+            if type_pion(plateau[line][col]):
+                if plateau[line][col][const.COULEUR] == couleur:
+                    serie4.append(plateau[line][col])
+                    pos.append((line, col))
 
                 if len(serie4) >= 2:
                     f = len(serie4) - 1
-                    if pos[f][0] == pos[f - 1][0] + 1:
-                        if pos[f][1] == pos[f - 1][1] - 1:
-                            for r in range(f):
-                                del pos[0]
-                                del serie4[0]
+                    if not pos[f][0] == pos[f - 1][0] - 1 or not pos[f][1] == pos[f - 1][1] + 1:
+                        for r in range(f):
+                            del pos[0]
+                            del serie4[0]
 
             if len(serie4) >= 4:
                 listeSerie4.append(pos)
                 fin = True
 
+            col += 1
+            line -= 1
+
+        if j >= 3:
+            ni = True
+        else:
             j += 1
-            h -= 1
+
+        if ni:
+            i -= 1
+            j = 0
+
+        rep += 1
+    return listeSerie4
 
     return listeSerie4
