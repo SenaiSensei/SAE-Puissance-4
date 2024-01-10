@@ -182,6 +182,7 @@ def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
         serie4 = []
         pos = []
         fin = False
+
         while col < const.NB_COLUMNS and line < const.NB_LINES and not fin:
             if type_pion(plateau[line][col]):
                 if plateau[line][col][const.COULEUR] == couleur:
@@ -201,48 +202,17 @@ def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
 
             col += 1
             line += 1
+
         if j >= 3:
             ni = True
         else:
             j += 1
+
         if ni:
             i += 1
             j = 0
+
         rep += 1
-
-    """repeat = 0
-    limite = const.NB_COLUMNS - 3
-    for i in range(const.NB_LINES):
-        if repeat <= 1:
-            limite = 1
-        while repeat < limite:
-            j = 0
-            serie4 = []
-            pos = []
-            fin = False
-            h = i
-            while j < const.NB_COLUMNS and h < const.NB_LINES and not fin:
-
-                if type_pion(plateau[h][j]):
-                    if plateau[h][j][const.COULEUR] == couleur:
-                        serie4.append(plateau[h][j])
-                        pos.append((h,j))
-
-                    if len(serie4) >= 2:
-                        f = len(serie4) - 1
-                        if not pos[f][0] == pos[f - 1][0] + 1:
-                            if not pos[f][1] == pos[f-1][1] + 1:
-                                for r in range(f):
-                                    del pos[0]
-                                    del serie4[0]
-
-                if len(serie4) >= 4:
-                    listeSerie4.append(pos)
-                    fin = True
-
-                j += 1
-                h += 1
-            repeat += 1"""
     return listeSerie4
 
 def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
