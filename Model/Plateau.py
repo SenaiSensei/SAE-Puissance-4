@@ -197,7 +197,7 @@ def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
                             del serie4[0]
 
             if len(serie4) >= 4:
-                listeSerie4.append(pos)
+                listeSerie4.append(serie4)
                 fin = True
 
             col += 1
@@ -256,7 +256,7 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
                             del serie4[0]
 
             if len(serie4) >= 4:
-                listeSerie4.append(pos)
+                listeSerie4.append(serie4)
                 fin = True
 
             col += 1
@@ -274,4 +274,19 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
         rep += 1
     return listeSerie4
 
-    return listeSerie4
+def getPionsGagnantsPlateau(plateau: list) -> list:
+    """
+    Fonction qui retourne les pions gagnants de chaque couleurs
+    :param plateau: Liste des positions des pions sur le plateau
+    :return: liste des pions de chaque couleurs aligné par 4 en ligne, en colonne et en digonale directe et indirecte
+    """
+    if not (type_plateau(plateau)):
+        raise TypeError("getPionsGagnantsPlateau : Le paramètre n'est pas à un plateau.")
+
+    listePionsGagnants = []
+    listePionsRouge = []
+    listePionsRouge.append((detecter4verticalPlateau(plateau,const.ROUGE),detecter4horizontalPlateau(plateau,const.ROUGE),detecter4diagonaleDirectePlateau(plateau,const.ROUGE),detecter4diagonaleIndirectePlateau(plateau,const.ROUGE)))
+    listePionsJaune = []
+    listePionsJaune.append((detecter4verticalPlateau(plateau,const.JAUNE),detecter4horizontalPlateau(plateau,const.JAUNE),detecter4diagonaleDirectePlateau(plateau,const.JAUNE),detecter4diagonaleIndirectePlateau(plateau,const.JAUNE)))
+    listePionsGagnants.append((listePionsRouge,listePionsJaune))
+    return listePionsGagnants
