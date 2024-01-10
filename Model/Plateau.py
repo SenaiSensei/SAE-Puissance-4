@@ -127,8 +127,7 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
     elif type(couleur) != int:
         raise TypeError("detecter4verticalPlateau : le second paramètre n’est pas un entier.")
     elif couleur > 1 or couleur < 0:
-        raise ValueError(
-            "detecter4verticalPlateau : La valeur de la couleur (valeur_du_paramètre) n’est pas correcte.")
+        raise ValueError("detecter4verticalPlateau : La valeur de la couleur (valeur_du_paramètre) n’est pas correcte.")
 
     listeSerie4 = []
     for j in range(const.NB_COLUMNS):
@@ -140,7 +139,7 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
             if type_pion(plateau[i][j]):
                 if plateau[i][j][const.COULEUR] == couleur:
                     serie4.append(plateau[i][j])
-                    pos.append(j)
+                    pos.append(i)
 
                 if len(serie4) >= 2:
                     f = len(serie4) - 1
@@ -154,4 +153,50 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
                 fin = True
 
             i += 1
+    return listeSerie4
+
+def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
+    """
+    Retourne une liste de liste de 4 pions aligné en diagonale directe de la couleur choisie
+        :param plateau: Paramètre lu pour connaître la position des pions
+        :param couleur: Paramètre de la couleur choisie
+        :return: tableau 2D des pions alignés en diagonale directe
+    """
+
+    if not (type_plateau(plateau)):
+        raise TypeError("detecter4diagonaleDirectePlateau : Le premier paramètre ne correspond pas à un plateau.")
+    elif type(couleur) != int:
+        raise TypeError("detecter4diagonaleDirectePlateau : le second paramètre n’est pas un entier.")
+    elif couleur > 1 or couleur < 0:
+        raise ValueError("detecter4diagonaleDirectePlateau : La valeur de la couleur (valeur_du_paramètre) n’est pas correcte.")
+
+
+    listeSerie4 = []
+    for j in range(const.NB_COLUMNS-2):
+        i = 0
+        serie4 = []
+        pos = []
+        fin = False
+        h = j
+        while i < const.NB_LINES and h < const.NB_COLUMNS and not fin:
+            if type_pion(plateau[i][h]):
+                if plateau[i][h][const.COULEUR] == couleur:
+                    serie4.append(plateau[i][h])
+                    pos.append((i,h))
+
+                if len(serie4) >= 2:
+                    f = len(serie4) - 1
+                    if pos[f][0] < pos[f - 1][0] + 1:
+                        if pos[f][1] < pos[f-1][1] + 1:
+                            for r in range(f):
+                                del pos[0]
+                                del serie4[0]
+
+            if len(serie4) >= 4:
+                listeSerie4.append(serie4)
+                fin = True
+
+            i += 1
+            h += 1
+
     return listeSerie4
