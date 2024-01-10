@@ -290,3 +290,24 @@ def getPionsGagnantsPlateau(plateau: list) -> list:
     listePionsJaune.append((detecter4verticalPlateau(plateau,const.JAUNE),detecter4horizontalPlateau(plateau,const.JAUNE),detecter4diagonaleDirectePlateau(plateau,const.JAUNE),detecter4diagonaleIndirectePlateau(plateau,const.JAUNE)))
     listePionsGagnants.append((listePionsRouge,listePionsJaune))
     return listePionsGagnants
+
+def isRempliPlateau(plateau: list) -> bool:
+    """
+    Verifie si le plateau est rempli
+    :param plateau: Liste des positions des pions sur le plateau
+    :return: True si le plateau est rempli, False sinon
+    """
+
+    if not (type_plateau(plateau)):
+        raise TypeError("isRempliPlateau : Le paramètre n'est pas à un plateau.")
+
+    rempli = True
+    i = 0
+    while i < const.NB_LINES and rempli:
+        j = 0
+        while j < const.NB_COLUMNS and rempli:
+            if plateau[i][j] == None:
+                rempli = False
+            j += 1
+        i += 1
+    return rempli
