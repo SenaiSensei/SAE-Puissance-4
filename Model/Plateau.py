@@ -172,31 +172,120 @@ def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
 
 
     listeSerie4 = []
-    for j in range(const.NB_COLUMNS-2):
-        i = 0
+    i = 0
+    rep = 0
+    j = 0
+    ni = False
+    while rep < const.NB_LINES:
+        line = i
+        col = j
         serie4 = []
         pos = []
         fin = False
-        h = j
-        while i < const.NB_LINES and h < const.NB_COLUMNS and not fin:
-            if type_pion(plateau[i][h]):
-                if plateau[i][h][const.COULEUR] == couleur:
-                    serie4.append(plateau[i][h])
-                    pos.append((i,h))
+        while col < const.NB_COLUMNS and line < const.NB_LINES and not fin:
+            if type_pion(plateau[line][col]):
+                if plateau[line][col][const.COULEUR] == couleur:
+                    serie4.append(plateau[line][col])
+                    pos.append((line, col))
 
                 if len(serie4) >= 2:
                     f = len(serie4) - 1
-                    if pos[f][0] < pos[f - 1][0] + 1:
-                        if pos[f][1] < pos[f-1][1] + 1:
+                    if not pos[f][0] == pos[f - 1][0] + 1 or not pos[f][1] == pos[f - 1][1] + 1:
+                        for r in range(f):
+                            del pos[0]
+                            del serie4[0]
+
+            if len(serie4) >= 4:
+                listeSerie4.append(pos)
+                fin = True
+
+            col += 1
+            line += 1
+        if j >= 3:
+            ni = True
+        else:
+            j += 1
+        if ni:
+            i += 1
+            j = 0
+        rep += 1
+
+    """repeat = 0
+    limite = const.NB_COLUMNS - 3
+    for i in range(const.NB_LINES):
+        if repeat <= 1:
+            limite = 1
+        while repeat < limite:
+            j = 0
+            serie4 = []
+            pos = []
+            fin = False
+            h = i
+            while j < const.NB_COLUMNS and h < const.NB_LINES and not fin:
+
+                if type_pion(plateau[h][j]):
+                    if plateau[h][j][const.COULEUR] == couleur:
+                        serie4.append(plateau[h][j])
+                        pos.append((h,j))
+
+                    if len(serie4) >= 2:
+                        f = len(serie4) - 1
+                        if not pos[f][0] == pos[f - 1][0] + 1:
+                            if not pos[f][1] == pos[f-1][1] + 1:
+                                for r in range(f):
+                                    del pos[0]
+                                    del serie4[0]
+
+                if len(serie4) >= 4:
+                    listeSerie4.append(pos)
+                    fin = True
+
+                j += 1
+                h += 1
+            repeat += 1"""
+    return listeSerie4
+
+def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
+    """
+        Retourne une liste de liste de 4 pions aligné en diagonale indirecte de la couleur choisie
+            :param plateau: Paramètre lu pour connaître la position des pions
+            :param couleur: Paramètre de la couleur choisie
+            :return: tableau 2D des pions alignés en diagonale indirecte
+        """
+
+    if not (type_plateau(plateau)):
+        raise TypeError("detecter4diagonaleIndirectePlateau : Le premier paramètre ne correspond pas à un plateau.")
+    elif type(couleur) != int:
+        raise TypeError("detecter4diagonaleIndirectePlateau : le second paramètre n’est pas un entier.")
+    elif couleur > 1 or couleur < 0:
+        raise ValueError("detecter4diagonaleIndirectePlateau : La valeur de la couleur (valeur_du_paramètre) n’est pas correcte.")
+
+    listeSerie4 = []
+    for i in range(const.NB_LINES -1, -1, -1):
+        j = 0
+        serie4 = []
+        pos = []
+        fin = False
+        h = i
+        while j < const.NB_COLUMNS and h >= 0 and not fin:
+            if type_pion(plateau[h][j]):
+                if plateau[h][j][const.COULEUR] == couleur:
+                    serie4.append(plateau[h][j])
+                    pos.append((h, j))
+
+                if len(serie4) >= 2:
+                    f = len(serie4) - 1
+                    if pos[f][0] == pos[f - 1][0] + 1:
+                        if pos[f][1] == pos[f - 1][1] - 1:
                             for r in range(f):
                                 del pos[0]
                                 del serie4[0]
 
             if len(serie4) >= 4:
-                listeSerie4.append(serie4)
+                listeSerie4.append(pos)
                 fin = True
 
-            i += 1
-            h += 1
+            j += 1
+            h -= 1
 
     return listeSerie4

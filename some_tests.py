@@ -33,9 +33,10 @@ for _ in range(20):
 print(toStringPlateau(p))"""
 
 p2 = construirePlateau()
-for _ in range(30):
+for _ in range(75):
     placerPionPlateau(p2, construirePion(const.ROUGE),randint(0, const.NB_COLUMNS - 1))
-print(detecter4horizontalPlateau(p2,const.ROUGE))
-print(detecter4verticalPlateau(p2,const.ROUGE))
-print("diago : ",detecter4diagonaleDirectePlateau(p2,const.ROUGE))
+print("horizontal : ", detecter4horizontalPlateau(p2,const.ROUGE))
+print("vertical : ", detecter4verticalPlateau(p2,const.ROUGE))
+print("diago : ", detecter4diagonaleDirectePlateau(p2,const.ROUGE))
+print("diago indirecte : ", detecter4diagonaleIndirectePlateau(p2,const.ROUGE))
 print(toStringPlateau(p2))
