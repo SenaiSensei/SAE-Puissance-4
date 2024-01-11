@@ -58,11 +58,11 @@ def placerPionPlateau(plateau: list, pion: dict, numCol: int) -> int:
 
     if not type_plateau(plateau):
         raise TypeError("placerPionPlateau : Le premier paramètre ne correspond pas à un plateau.")
-    elif not type_pion(pion):
+    if not type_pion(pion):
         raise TypeError("placerPionPlateau : Le second paramètre n’est pas un pion.")
-    elif type(numCol) != int:
+    if type(numCol) != int:
         raise TypeError("placerPionPlateau : Le troisième paramètre n’est pas un entier.")
-    elif numCol > 6 or numCol < 0:
+    if numCol > 6 or numCol < 0:
         raise ValueError("placerPionPlateau : La valeur de la colonne (valeur_du_paramètre) n’est pas correcte .")
 
     pos = False
@@ -84,9 +84,9 @@ def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
     """
     if not(type_plateau(plateau)):
         raise TypeError("detecter4horizontalPlateau : Le premier paramètre ne correspond pas à un plateau.")
-    elif type(couleur) != int:
+    if type(couleur) != int:
         raise TypeError("detecter4horizontalPlateau : le second paramètre n’est pas un entier.")
-    elif couleur > 1 or couleur < 0:
+    if couleur > 1 or couleur < 0:
         raise ValueError("detecter4horizontalPlateau : La valeur de la couleur (valeur_du_paramètre) n’est pas correcte.")
 
     listeSerie4 = []
@@ -124,9 +124,9 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
         """
     if not (type_plateau(plateau)):
         raise TypeError("detecter4verticalPlateau : Le premier paramètre ne correspond pas à un plateau.")
-    elif type(couleur) != int:
+    if type(couleur) != int:
         raise TypeError("detecter4verticalPlateau : le second paramètre n’est pas un entier.")
-    elif couleur > 1 or couleur < 0:
+    if couleur > 1 or couleur < 0:
         raise ValueError("detecter4verticalPlateau : La valeur de la couleur (valeur_du_paramètre) n’est pas correcte.")
 
     listeSerie4 = []
@@ -165,9 +165,9 @@ def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
 
     if not (type_plateau(plateau)):
         raise TypeError("detecter4diagonaleDirectePlateau : Le premier paramètre ne correspond pas à un plateau.")
-    elif type(couleur) != int:
+    if type(couleur) != int:
         raise TypeError("detecter4diagonaleDirectePlateau : le second paramètre n’est pas un entier.")
-    elif couleur > 1 or couleur < 0:
+    if couleur > 1 or couleur < 0:
         raise ValueError("detecter4diagonaleDirectePlateau : La valeur de la couleur (valeur_du_paramètre) n’est pas correcte.")
 
 
@@ -225,9 +225,9 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
 
     if not (type_plateau(plateau)):
         raise TypeError("detecter4diagonaleIndirectePlateau : Le premier paramètre ne correspond pas à un plateau.")
-    elif type(couleur) != int:
+    if type(couleur) != int:
         raise TypeError("detecter4diagonaleIndirectePlateau : le second paramètre n’est pas un entier.")
-    elif couleur > 1 or couleur < 0:
+    if couleur > 1 or couleur < 0:
         raise ValueError("detecter4diagonaleIndirectePlateau : La valeur de la couleur (valeur_du_paramètre) n’est pas correcte.")
 
     listeSerie4 = []
