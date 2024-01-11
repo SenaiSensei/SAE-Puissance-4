@@ -109,7 +109,7 @@ def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
                             del serie4[0]
 
             if len(serie4) >= 4:
-                listeSerie4.append(serie4)
+                listeSerie4.extend(serie4)
                 fin = True
 
             j += 1
@@ -149,7 +149,7 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
                             del serie4[0]
 
             if len(serie4) >= 4:
-                listeSerie4.append(serie4)
+                listeSerie4.extend(serie4)
                 fin = True
 
             i += 1
@@ -197,7 +197,7 @@ def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
                             del serie4[0]
 
             if len(serie4) >= 4:
-                listeSerie4.append(serie4)
+                listeSerie4.extend(serie4)
                 fin = True
 
             col += 1
@@ -256,7 +256,7 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
                             del serie4[0]
 
             if len(serie4) >= 4:
-                listeSerie4.append(serie4)
+                listeSerie4.extend(serie4)
                 fin = True
 
             col += 1
@@ -285,10 +285,17 @@ def getPionsGagnantsPlateau(plateau: list) -> list:
 
     listePionsGagnants = []
     listePionsRouge = []
-    listePionsRouge.append((detecter4verticalPlateau(plateau,const.ROUGE),detecter4horizontalPlateau(plateau,const.ROUGE),detecter4diagonaleDirectePlateau(plateau,const.ROUGE),detecter4diagonaleIndirectePlateau(plateau,const.ROUGE)))
+    listePionsRouge.extend(detecter4verticalPlateau(plateau,const.ROUGE))
+    listePionsRouge.extend(detecter4horizontalPlateau(plateau,const.ROUGE))
+    listePionsRouge.extend(detecter4diagonaleDirectePlateau(plateau,const.ROUGE))
+    listePionsRouge.extend(detecter4diagonaleIndirectePlateau(plateau,const.ROUGE))
+    listePionsGagnants.extend(listePionsRouge)
     listePionsJaune = []
-    listePionsJaune.append((detecter4verticalPlateau(plateau,const.JAUNE),detecter4horizontalPlateau(plateau,const.JAUNE),detecter4diagonaleDirectePlateau(plateau,const.JAUNE),detecter4diagonaleIndirectePlateau(plateau,const.JAUNE)))
-    listePionsGagnants.append((listePionsRouge,listePionsJaune))
+    listePionsJaune.extend(detecter4verticalPlateau(plateau,const.JAUNE))
+    listePionsJaune.extend(detecter4horizontalPlateau(plateau,const.JAUNE))
+    listePionsJaune.extend(detecter4diagonaleDirectePlateau(plateau,const.JAUNE))
+    listePionsJaune.extend(detecter4diagonaleIndirectePlateau(plateau,const.JAUNE))
+    listePionsGagnants.extend(listePionsJaune)
     return listePionsGagnants
 
 def isRempliPlateau(plateau: list) -> bool:
