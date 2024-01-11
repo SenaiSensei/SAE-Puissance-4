@@ -7,6 +7,11 @@ print("\x1B[41mA\x1B[0m : A sur fond rouge")
 
 
 def toStringPlateau(plateau: list) -> str:
+    """
+    Affiche un plateau de jeu sur la console
+    :param plateau: liste représentant le plateau
+    :return: un str représentant le plateau de jeu
+    """
     p = ""
     for i in range(const.NB_LINES):
         ligne = "|"
