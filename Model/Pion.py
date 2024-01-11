@@ -74,7 +74,7 @@ def getIdPion(pion: dict) -> int:
     :param pion: Paramètre dont on veut connaître l'identifiant
     :return: Un entier représentant l'identifiant du pion
     """
-    if not(type_pion(pion)):
+    if not type_pion(pion):
         raise TypeError("getIdPion : Le paramètre n’est pas un pion. ")
     return pion[const.ID]
 
