@@ -38,8 +38,10 @@ for _ in range(20):
 print(toStringPlateau(p))"""
 
 p2 = construirePlateau()
+print(p2)
 for _ in range(30):
     placerPionPlateau(p2, construirePion(choice(const.COULEURS)),randint(0, const.NB_COLUMNS - 1))
+    print(toStringPlateau(p2))
 print(getPionsGagnantsPlateau(p2))
-print(toStringPlateau(p2))
+
 print(isRempliPlateau(p2))

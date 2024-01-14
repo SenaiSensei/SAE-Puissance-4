@@ -318,3 +318,68 @@ def isRempliPlateau(plateau: list) -> bool:
             j += 1
         i += 1
     return rempli
+
+
+def placerPionLignePlateau(plateau: list, pion: dict, nb_ligne: int, left: bool) -> tuple:
+    """
+    Creer un déplacement horizontal pour les pions
+    :param plateau: liste représentant le plateau
+    :param pion: dictionnaire représentant le pion
+    :param nb_ligne: entier correspondant à la ligne où est placer le pion
+    :param left: True si le pion est mis par la gauche, False par la droite
+    :return: un tuple avec les pions déplacer et la ligne auquel est tombé le dernier pion
+    """
+
+    if not type_plateau(plateau):
+        raise TypeError("placerPionLignePlateau : Le premier paramètre n’est pas un plateau.")
+    if not type_pion(pion):
+        raise TypeError("placerPionLignePlateau : Le second paramètre n’est pas un pion.")
+    if type(nb_ligne) != int:
+        raise TypeError("placerPionLignePlateau : le troisième paramètre n’est pas un entier.")
+    if nb_ligne < 0 or nb_ligne > const.NB_LINES-1:
+        raise ValueError("placerPionLignePlateau : Le troisième paramètre (valeur_du_paramètre) ne désigne pas une ligne .")
+    if type(left) != bool:
+        raise TypeError("« placerPionLignePlateau : le quatrième paramètre n’est pas un booléen.")
+
+    tombe = None
+    listePion = [pion]
+    if left:
+        j = 0
+        while j < const.NB_COLUMNS-1 and tombe is None:
+            if plateau[nb_ligne][j] != None:
+                listePion.append(plateau[nb_ligne][j])
+                plateau[nb_ligne][j] = listePion[j]
+            else :
+                line = nb_ligne
+                while line < const.NB_LINES:
+                    if plateau[line][j] == None:
+                        tombe = line
+                    elif line == const.NB_COLUMNS:
+                        tombe = const.NB_LINES
+                    line += 1
+            val = tombe
+            if val is None:
+                val = nb_ligne
+            plateau[val][j] = listePion[j]
+            j += 1
+    else:
+        j = const.NB_LINES
+        compteur = 0
+        while j >= 0 and tombe is None:
+            if plateau[nb_ligne][j] != None:
+                listePion.append(plateau[nb_ligne][j])
+            else:
+                line = nb_ligne
+                while line < const.NB_LINES:
+                    if plateau[line][j] == None:
+                        tombe = line
+                    elif line == 0:
+                        tombe = const.NB_LINES
+                    line += 1
+            val = tombe
+            if val is None:
+                val = nb_ligne
+            plateau[val][j] = listePion[compteur]
+            j -= 1
+            compteur += 1
+    return (listePion, tombe)
