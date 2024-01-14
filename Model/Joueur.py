@@ -137,14 +137,43 @@ def _placerPionJoueur(joueur: dict) -> int:
     :param joueur: dictionnaire représentant l'IA
     :return: un entier correspondant à la colonne où est joué le pion
     """
+
     nbReturn = 0
-    while nbReturn == 0:
-        nb = randint(0, const.NB_COLUMNS - 1)
-        i = const.NB_LINES - 1
-        while i >= 0 and nbReturn == 0:
-            if joueur[const.PLATEAU][i][nb] == None:
-                nbReturn = nb
-            i -= 1
+
+    if getModeEtenduJoueur(joueur):
+        while nbReturn == 0:
+            nb = randint(-const.NB_LINES, const.NB_COLUMNS + const.NB_LINES-1)
+            i = 0
+            if nb <= -1 and nb >= -const.NB_LINES:
+                i = -nb -1
+                j = 0
+                while j < const.NB_COLUMNS and nbReturn == 0:
+                    if joueur[const.PLATEAU][i][j] == None:
+                        nbReturn = nb
+                    j += 1
+
+            elif nb >= 0 and nb <= const.NB_COLUMNS - 1:
+                i = const.NB_LINES - 1
+                while i >= 0 and nbReturn == 0:
+                    if joueur[const.PLATEAU][i][nb] == None:
+                        nbReturn = nb
+                        i -= 1
+
+            elif nb >= const.NB_COLUMNS and nb <=  const.NB_COLUMNS + const.NB_LINES-1:
+                i = nb - const.NB_COLUMNS
+                j = const.NB_COLUMNS-1
+                while j >= 0 and nbReturn == 0:
+                    if joueur[const.PLATEAU][i][j] == None:
+                        nbReturn = nb
+                    j -= 1
+    else:
+        while nbReturn == 0:
+            nb = randint(0, const.NB_COLUMNS - 1)
+            i = const.NB_LINES - 1
+            while i >= 0 and nbReturn == 0:
+                if joueur[const.PLATEAU][i][nb] == None:
+                    nbReturn = nb
+                i -= 1
     return nbReturn
 
 def initialiserIAJoueur(joueur: dict, place: bool) -> None:
