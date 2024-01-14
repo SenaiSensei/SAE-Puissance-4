@@ -406,3 +406,27 @@ def encoderPlateau(plateau: list) -> str:
                 line += "J"
         res += line
     return res
+
+def isPatPlateau(plateau: list, histoPlateau: dict) -> bool:
+    """
+    Vérifie si le plateau est apparu 5 fois
+    :param plateau: liste correspondant au plateau de jeu
+    :param histoPlateau: dictionnaire correspondant à l'histograme des plateaux de jeux
+    :return: True si le plateau est apparu 5 fois, False sinon
+    """
+
+    if not type_plateau(plateau):
+        raise TypeError("isPatPlateau : Le premier paramètre n’est pas un plateau.")
+    if type(histoPlateau) != dict:
+        raise TypeError("« isPatPlateau : Le second paramètre n’est pas un dictionnaire.")
+
+    res = False
+    plat = encoderPlateau(plateau)
+    if plat in histoPlateau:
+        histoPlateau[plat] += 1
+        if histoPlateau[plat] >= 5:
+            res = True
+    else:
+        histoPlateau[plat] = 1
+
+    return res
