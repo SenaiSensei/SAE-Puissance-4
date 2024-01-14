@@ -383,3 +383,26 @@ def placerPionLignePlateau(plateau: list, pion: dict, nb_ligne: int, left: bool)
             j -= 1
             compteur += 1
     return (listePion, tombe)
+
+def encoderPlateau(plateau: list) -> str:
+    """
+    Renvoie sous forme de chaîne de caractère les pions sur le plateau. "_" si c'est None, "R" si c'est un pion rouge et "J" si c'est un pion jaune
+    :param plateau: liste correspondant au plateau de jeu
+    :return: plateau de jeu sous forme de chaîne de caractère
+    """
+
+    if not type_plateau(plateau):
+        raise TypeError("encoderPlateau : le paramètre ne correspond pas à un plateau.")
+
+    res = ""
+    for i in range(const.NB_LINES):
+        line = ""
+        for j in range(const.NB_COLUMNS):
+            if plateau[i][j] == None:
+                line += "_"
+            elif plateau[i][j][const.COULEUR] == const.ROUGE:
+                line += "R"
+            elif plateau[i][j][const.COULEUR] == const.JAUNE:
+                line += "J"
+        res += line
+    return res
